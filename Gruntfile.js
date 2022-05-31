@@ -19,6 +19,7 @@ module.exports = function (grunt) {
   var modRewrite = require('connect-modrewrite');
 
   grunt.loadNpmTasks('grunt-connect-proxy');
+  grunt.loadNpmTasks('grunt-force');
 
   // Configurable paths for the application
   var appConfig = {
@@ -414,6 +415,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'force:on',
     'clean:dist',
     'wiredep',
     'useminPrepare',

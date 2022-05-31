@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:buster
 MAINTAINER "Konrad Kleine"
 
 
@@ -61,14 +61,13 @@ ADD .git/refs $SOURCE_DIR/.git/refs
 
 RUN apt-get -y update && \
     export DEBIAN_FRONTEND=noninteractive && \
+    echo deb http://deb.debian.org/debian buster-backports main | tee /etc/apt/sources.list.d/buster-backports.list && \
+    apt update && \
+    apt install -y -t buster-backports apache2 && \
     apt-get -y install \
-      apache2 \
       bzip2 \
-      libapache2-mod-auth-kerb \
-      libapache2-mod-proxy-html \
       git \
       nodejs \
-      nodejs-legacy \
       npm \
       --no-install-recommends && \
     a2enmod proxy && \
